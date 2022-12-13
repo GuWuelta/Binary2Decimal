@@ -1,13 +1,10 @@
 function convertBinaryToStringArray(binary: string) {
-  const stringArray = binary.split("");
+  const stringArray = binary.replace(".", ",").split("");
   return stringArray;
 }
 
 function catchIdxs(stringArray: string[]) {
-  if (stringArray.includes(".")) {
-    const dotPosition = stringArray.indexOf(".");
-    stringArray[dotPosition].replace(".", ",");
-  }
+  if (!stringArray.includes(",")) return 0;
   const commaPosition = stringArray.indexOf(",");
   const numsAfterComma = stringArray.slice(commaPosition + 1);
   let idxs = numsAfterComma.length;
@@ -15,8 +12,15 @@ function catchIdxs(stringArray: string[]) {
 }
 
 function convertStringArrayToNumberArray(stringArray: string[]) {
-  const numberArray = stringArray.map((element) => {
-    if (element !== ",") return element;
+  let numberArray = stringArray.map((element) => {
+    if (element === "0" || element === "1") return Number(element);
   });
-  return numberArray;
+  return numberArray.filter((num) => typeof num === "number");
+}
+
+function calculate(numberArray: number[], idx: number) {
+  numberArray.reduceRight((acc, cur, idx) => {
+    acc += cur * 2 ** idx;
+    return acc;
+  }, 0);
 }
