@@ -11,11 +11,12 @@ function catchIdxs(stringArray: string[]): number {
   return -idxs;
 }
 
-function convertStringArrayToNumberArray(stringArray: string[]): (number | undefined)[] {
+function convertStringArrayToNumberArray(stringArray: string[]) {
   let numberArray = stringArray.map((element) => {
     if (element === "0" || element === "1") return Number(element);
   });
-  return numberArray.filter((num) => typeof num === "number");
+  numberArray = numberArray.filter((num) => typeof num === "number");
+  return numberArray;[]
 }
 
 function calculate(numberArray: number[], idx: number): number {
@@ -24,4 +25,11 @@ function calculate(numberArray: number[], idx: number): number {
     idx++;
     return acc;
   }, 0);
+}
+
+function run() {
+  const stringArray = convertBinaryToStringArray("10010");
+  const idx = catchIdxs(stringArray);
+  const numberArray = convertStringArrayToNumberArray(stringArray);
+  //const decimal = calculate(numberArray, idx);
 }
