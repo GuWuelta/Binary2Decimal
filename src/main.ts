@@ -1,44 +1,46 @@
 function convertBinaryToStringArray(binary: string): string[] {
-  const stringArray: string[] = binary.replace(".", ",").split("");
-  return stringArray;
+  const strings: string[] = binary.replace(".", ",").split("");
+  return strings;
 }
 
-function checkIsBinary(stringArray: string[]) {
-  stringArray.map;
+function checkIsBinary(strings: string[]) {
+  let isBinary = false;
 }
 
-function catchIdxs(stringArray: string[]): number {
-  if (!stringArray.includes(",")) return 0;
-  const commaPosition: number = stringArray.indexOf(",");
-  const numsAfterComma: string[] = stringArray.slice(commaPosition + 1);
+function catchIndexes(strings: string[]): number {
+  if (!strings.includes(",")) return 0;
+  const commaPosition: number = strings.indexOf(",");
+  const numsAfterComma: string[] = strings.slice(commaPosition + 1);
   let idxs: number = numsAfterComma.length;
   return -idxs;
 }
 
-function convertStringArrayToNumberArray(stringArray: string[]): number[] {
-  const numberArray: number[] = [];
-  for (const string of stringArray) {
+function convertStringsToNumbers(strings: string[]): number[] {
+  // Usar Reduce
+  const numbers: number[] = [];
+  for (const string of strings) {
+    // Usar includes
     if (string === "0" || string === "1") {
-      numberArray.push(Number(string));
+      numbers.push(Number(string));
     }
   }
-  return numberArray;
+  return numbers;
 }
 
-function calculate(numberArray: number[], idx: number): number {
-  return numberArray.reduceRight((acc, cur) => {
-    acc += cur * 2 ** idx;
+function calculate(numbers: number[], idx: number): number {
+  return numbers.reduceRight((result, currentNumber) => {
+    result += currentNumber * 2 ** idx;
     idx++;
-    return acc;
+    return result;
   }, 0);
 }
 
 function run(binary: string): void {
-  const stringArray: string[] = convertBinaryToStringArray(binary);
-  const idx: number = catchIdxs(stringArray);
-  const numberArray: number[] = convertStringArrayToNumberArray(stringArray);
-  const decimal: number = calculate(numberArray, idx);
-  console.log(decimal);
+  const strings: string[] = convertBinaryToStringArray(binary);
+  const idx: number = catchIndexes(strings);
+  const numbers: number[] = convertStringsToNumbers(strings);
+  const decimal: number = calculate(numbers, idx);
+  console.log({ decimal });
 }
 
 run("10010");
