@@ -3,8 +3,20 @@ function convertBinaryToStringArray(binary: string): string[] {
   return strings;
 }
 
-function checkIsBinary(strings: string[]) {
+function checkIsBinary(strings: string[]): boolean | undefined {
   let isBinary = false;
+  try {
+    const temp = strings.map((string) => {
+      return string === "1" || string === "0" || string === ",";
+    });
+    temp.includes(false) ? isBinary : (isBinary = true);
+    if (!isBinary) {
+      throw new Error("Number is not binary");
+    }
+    return isBinary;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function catchIndexes(strings: string[]): number {
@@ -37,10 +49,13 @@ function calculate(numbers: number[], idx: number): number {
 
 function run(binary: string): void {
   const strings: string[] = convertBinaryToStringArray(binary);
-  const idx: number = catchIndexes(strings);
-  const numbers: number[] = convertStringsToNumbers(strings);
-  const decimal: number = calculate(numbers, idx);
-  console.log({ decimal });
+  const isBinary = checkIsBinary(strings);
+  if (isBinary) {
+    const idx: number = catchIndexes(strings);
+    const numbers: number[] = convertStringsToNumbers(strings);
+    const decimal: number = calculate(numbers, idx);
+    console.log({ binary, decimal });
+  }
 }
 
 run("10010");
