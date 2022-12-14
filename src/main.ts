@@ -1,18 +1,18 @@
 function convertBinaryToStringArray(binary: string): string[] {
-  const stringArray = binary.replace(".", ",").split("");
+  const stringArray: string[] = binary.replace(".", ",").split("");
   return stringArray;
 }
 
 function catchIdxs(stringArray: string[]): number {
   if (!stringArray.includes(",")) return 0;
-  const commaPosition = stringArray.indexOf(",");
-  const numsAfterComma = stringArray.slice(commaPosition + 1);
-  let idxs = numsAfterComma.length;
+  const commaPosition: number = stringArray.indexOf(",");
+  const numsAfterComma: string[] = stringArray.slice(commaPosition + 1);
+  let idxs: number = numsAfterComma.length;
   return -idxs;
 }
 
 function convertStringArrayToNumberArray(stringArray: string[]): number[] {
-  const numberArray = [];
+  const numberArray: number[] = [];
   for (const string of stringArray) {
     if (string === "0" || string === "1") {
       numberArray.push(parseInt(string));
@@ -29,9 +29,12 @@ function calculate(numberArray: number[], idx: number): number {
   }, 0);
 }
 
-function run() {
-  const stringArray = convertBinaryToStringArray("10010");
-  const idx = catchIdxs(stringArray);
-  const numberArray = convertStringArrayToNumberArray(stringArray);
-  //const decimal = calculate(numberArray, idx);
+function run(binary: string): void {
+  const stringArray: string[] = convertBinaryToStringArray(binary);
+  const idx: number = catchIdxs(stringArray);
+  const numberArray: number[] = convertStringArrayToNumberArray(stringArray);
+  const decimal: number = calculate(numberArray, idx);
+  console.log(decimal);
 }
+
+run("10010");
