@@ -3,6 +3,10 @@ function convertBinaryToStringArray(binary: string): string[] {
   return stringArray;
 }
 
+function checkIsBinary(stringArray: string[]) {
+  stringArray.map;
+}
+
 function catchIdxs(stringArray: string[]): number {
   if (!stringArray.includes(",")) return 0;
   const commaPosition: number = stringArray.indexOf(",");
@@ -15,7 +19,7 @@ function convertStringArrayToNumberArray(stringArray: string[]): number[] {
   const numberArray: number[] = [];
   for (const string of stringArray) {
     if (string === "0" || string === "1") {
-      numberArray.push(parseInt(string));
+      numberArray.push(Number(string));
     }
   }
   return numberArray;
