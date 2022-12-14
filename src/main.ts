@@ -67,12 +67,11 @@ function catchIndexes(strings: string[]): number {
  * --------------------------------
  */
 function convertStringsToNumbers(strings: string[]): number[] {
-  // Usar Reduce
-  const numbers = strings.reduce((acc: number[], cur) => {
-    if (cur === "0" || cur === "1") {
-      acc.push(Number(cur));
+  const numbers = strings.reduce((numbers: number[], string) => {
+    if (string === "0" || string === "1") {
+      numbers.push(Number(string));
     }
-    return acc;
+    return numbers;
   }, []);
   return numbers;
 }
