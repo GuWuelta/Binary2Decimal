@@ -11,12 +11,14 @@ function catchIdxs(stringArray: string[]): number {
   return -idxs;
 }
 
-function convertStringArrayToNumberArray(stringArray: string[]) {
-  let numberArray = stringArray.map((element) => {
-    if (element === "0" || element === "1") return Number(element);
-  });
-  numberArray = numberArray.filter((num) => typeof num === "number");
-  return numberArray;[]
+function convertStringArrayToNumberArray(stringArray: string[]): number[] {
+  const numberArray = [];
+  for (const string of stringArray) {
+    if (string === "0" || string === "1") {
+      numberArray.push(parseInt(string));
+    }
+  }
+  return numberArray;
 }
 
 function calculate(numberArray: number[], idx: number): number {
