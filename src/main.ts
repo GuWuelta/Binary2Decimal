@@ -12,7 +12,7 @@
  * @return - array of strings with the characters of the parameter passed
  * --------------------------------
  */
-function convertBinaryToStringArray(binary: string): string[] {
+export function convertBinaryToStringArray(binary: string): string[] {
   const strings: string[] = binary.replace(".", ",").split("");
   return strings;
 }
@@ -26,12 +26,11 @@ function responsible for traversing the array of strings created and validating 
  * @return - Boolean: "True" if number is binary and "False" if is not
  * --------------------------------
  */
-function checkIsBinary(strings: string[]): boolean | undefined {
+export function checkIsBinary(strings: string[]): boolean | undefined {
   let isBinary = false;
+  const binaryChars = ["0", "1", ","];
   try {
-    const temp = strings.map((string) => {
-      return string === "1" || string === "0" || string === ",";
-    });
+    const temp = strings.map((string) => binaryChars.includes(string));
     temp.includes(false) ? isBinary : (isBinary = true);
     if (!isBinary) {
       throw new Error("Number is not binary");
@@ -50,7 +49,7 @@ function checkIsBinary(strings: string[]): boolean | undefined {
  * @return - Number: 0 if there is no comma, if there is, returns the quantity of numbers after the comma
  * --------------------------------
  */
-function catchIndexes(strings: string[]): number {
+export function catchIndexes(strings: string[]): number {
   if (!strings.includes(",")) return 0;
   const commaPosition: number = strings.indexOf(",");
   const numsAfterComma: string[] = strings.slice(commaPosition + 1);
@@ -66,9 +65,11 @@ function catchIndexes(strings: string[]): number {
  * @return - array of numbers
  * --------------------------------
  */
-function convertStringsToNumbers(strings: string[]): number[] {
+export function convertStringsToNumbers(strings: string[]): number[] {
+  const binaryNumbers = ["0", "1"];
   const numbers = strings.reduce((numbers: number[], string) => {
-    if (string === "0" || string === "1") {
+    // Ver se tem como mudar a lógica
+    if (binaryNumbers.includes(string)) {
       numbers.push(Number(string));
     }
     return numbers;
@@ -84,7 +85,7 @@ function convertStringsToNumbers(strings: string[]): number[] {
  * @return - Number: Binary in decimal format
  * --------------------------------
  */
-function calculate(numbers: number[], idx: number): number {
+export function calculate(numbers: number[], idx: number): number {
   return numbers.reduceRight((result, currentNumber) => {
     result += currentNumber * 2 ** idx;
     idx++;
@@ -100,15 +101,17 @@ function calculate(numbers: number[], idx: number): number {
  * @return - void
  * --------------------------------
  */
-function run(binary: string): void {
+export function run(binary: string): number | undefined {
   const strings: string[] = convertBinaryToStringArray(binary);
   const isBinary = checkIsBinary(strings);
-  if (isBinary) {
-    const idx: number = catchIndexes(strings);
-    const numbers: number[] = convertStringsToNumbers(strings);
-    const decimal: number = calculate(numbers, idx);
-    console.log({ binary, decimal });
-  }
+
+  if (!isBinary) return;
+
+  const idx: number = catchIndexes(strings);
+  const numbers: number[] = convertStringsToNumbers(strings);
+  const decimal: number = calculate(numbers, idx);
+  console.log({ binary, decimal });
+  return decimal;
 }
 
 run("10010");
