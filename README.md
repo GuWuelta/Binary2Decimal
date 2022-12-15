@@ -27,6 +27,7 @@
 
 - [TypeScript](https://www.typescriptlang.org/)
 - [Node.js](https://nodejs.org/en/)
+- [Jest](https://jestjs.io/pt-BR/)
 
 ## 🤝 Colaboradores
 
