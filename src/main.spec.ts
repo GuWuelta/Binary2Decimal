@@ -9,6 +9,7 @@ import {
 
 const binaryWithCommaInput = "10,010";
 const binaryInput = "10010";
+const notBinaryInput = "100103"
 const binaryStrings = ["1", "0", "0", "1", "0"];
 const binaryStringsWithComma = ["1", "0", ",", "0", "1", "0"];
 const notBinaryStrings = ["1", "3", "0", "1", "0"];
@@ -59,5 +60,8 @@ describe("Binary to decimal convert", () => {
   });
   it("should be able to call the other methods and return the decimal number", () => {
     expect(run(binaryInput)).toEqual(decimal);
+  });
+  it("should be able to return 'undefined' when the input is not a binary", () => {
+    expect(run(notBinaryInput)).toEqual(undefined);
   });
 });
